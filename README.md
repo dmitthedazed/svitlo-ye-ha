@@ -2,7 +2,7 @@
   <img src="images/logo.svg" alt="СвітлоЄ?" width="160">
 </p>
 
-<h1 align="center">СвітлоЄ? — Home Assistant</h1>
+<h1 align="center">СвітлоЄ? для Home Assistant</h1>
 
 <p align="center">
   <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=dmitthedazed&repository=svitlo-ye-ha&category=integration"><img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Додати в HACS"></a>
@@ -95,7 +95,7 @@ show_messages: true    # необов'язково
 
 | Сутність | Тип | Опис |
 |---|---|---|
-| **Є світло** | `binary_sensor` (`power`) | `on` — світло є. `off` — відключення або можливе відключення. `unknown` — графіка на цей час немає |
+| **Є світло** | `binary_sensor` (`power`) | `on`: світло є. `off`: відключення або можливе відключення. `unknown`: графіка на цей час немає |
 | **Графік** | `sensor` (enum) | Поточний статус. Атрибути: `today`, `tomorrow`, `current`, `messages` (оголошення обленерго), `queue` |
 | **Наступна зміна стану** | `sensor` (timestamp) | Коли світло з'явиться або зникне. Атрибут `next_power_state`: `on` / `off` |
 | **До відключення / увімкнення** | `sensor` (duration, хв) | Скільки хвилин до наступної зміни |
@@ -119,7 +119,7 @@ show_messages: true    # необов'язково
 <summary>Сервіс <code>svitlo_ye.get_schedule</code></summary>
 
 Повертає графік у відповіді сервісу (`response_variable`): `queue`, `server_updated`
-і `days` з інтервалами за датами. Параметр `days` від 1 до 7, типово 2. Ціль — будь-який
+і `days` з інтервалами за датами. Параметр `days` від 1 до 7, типово 2. Ціль: будь-який
 сенсор інтеграції.
 
 </details>
@@ -242,7 +242,7 @@ content: >-
 <summary>Таймлайн в apexcharts-card</summary>
 
 Потрібна [apexcharts-card](https://github.com/RomRider/apexcharts-card) з HACS.
-На графіку `1` — світло є, `0` — відключення, `0.5` — можливе відключення.
+На графіку `1`: світло є, `0`: відключення, `0.5`: можливе відключення.
 
 ```yaml
 type: custom:apexcharts-card

@@ -1,0 +1,16 @@
+name: Ідея
+description: Пропозиція для інтеграції або картки
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Що хочеться
+      description: Що ви хочете зробити і як це має виглядати або працювати.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Навіщо
+      description: Ситуація, у якій це знадобиться.
