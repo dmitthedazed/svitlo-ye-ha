@@ -1,0 +1,7 @@
+{
+  "name": "СвітлоЄ? (Житомиробленерго)",
+  "content_in_root": false,
+  "homeassistant": "2025.2.0",
+  "render_readme": true,
+  "country": ["UA"]
+}

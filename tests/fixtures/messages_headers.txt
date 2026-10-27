@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Tue, 27 Oct 2026 01:38:40 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 494
+Connection: keep-alive
+X-Powered-By: PHP/7.4.33
+Last-Modified-Shedules-Date: 2026.10.27 00:16:59
+Last-Modified-Adresses-Date: 2026.10.13 14:50:04
+Content-Language: ua
+

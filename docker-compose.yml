@@ -1,0 +1,12 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: svitlo-ha
+    restart: unless-stopped
+    ports:
+      - "8123:8123"
+    environment:
+      - TZ=Europe/Kyiv
+    volumes:
+      - ./.ha-config:/config
+      - ./custom_components/svitlo_ye:/config/custom_components/svitlo_ye

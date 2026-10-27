@@ -1,0 +1,240 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Район електромереж (РЕМ)",
+        "description": "Оберіть РЕМ АТ «Житомиробленерго», до якого належить адреса.",
+        "data": {
+          "rem_id": "РЕМ"
+        },
+        "data_description": {
+          "rem_id": "Регіональна одиниця електромереж."
+        }
+      },
+      "city": {
+        "title": "Населений пункт",
+        "description": "РЕМ: {rem}",
+        "data": {
+          "city_id": "Населений пункт"
+        },
+        "data_description": {
+          "city_id": "Місто, селище або село."
+        }
+      },
+      "street_search": {
+        "title": "Пошук вулиці",
+        "description": "У «{city}» {count} вулиць. Введіть частину назви (наприклад, «Київська»), щоб скоротити список. Залиште порожнім, щоб показати всі.",
+        "data": {
+          "street_search": "Частина назви вулиці"
+        },
+        "data_description": {
+          "street_search": "Пошук без урахування регістру."
+        }
+      },
+      "street": {
+        "title": "Вулиця",
+        "description": "Населений пункт: {city}",
+        "data": {
+          "street_id": "Вулиця"
+        },
+        "data_description": {
+          "street_id": "Вулиця, провулок, площа тощо."
+        }
+      },
+      "house": {
+        "title": "Будинок",
+        "description": "Вулиця: {street}. Біля кожного будинку вказано його чергу.",
+        "data": {
+          "house": "Будинок",
+          "name": "Назва (необов'язково)"
+        },
+        "data_description": {
+          "house": "Номер будинку та черга/підчерга відключень.",
+          "name": "Наприклад, «Дім» або «Робота». За замовчуванням — вулиця та будинок."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Не вдалося зв'язатися з сервером Житомиробленерго. Спробуйте ще раз.",
+      "no_cities": "Для цього РЕМ немає населених пунктів.",
+      "no_streets": "Для цього населеного пункту немає вулиць.",
+      "no_street_match": "Не знайдено жодної вулиці з такою назвою.",
+      "no_houses": "Для цієї вулиці немає будинків."
+    },
+    "abort": {
+      "already_configured": "Цю адресу вже додано.",
+      "cannot_connect": "Не вдалося зв'язатися з сервером Житомиробленерго.",
+      "reconfigure_successful": "Адресу оновлено."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Налаштування",
+        "data": {
+          "scan_interval": "Інтервал оновлення (хвилин)"
+        },
+        "data_description": {
+          "scan_interval": "Як часто завантажувати графік із сервера. Стан сутностей перераховується щохвилини незалежно від цього."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "power": {
+        "name": "Є світло",
+        "state_attributes": {
+          "status": {
+            "name": "Статус",
+            "state": {
+              "available": "Світло є",
+              "outage": "Відключення",
+              "probable": "Можливе відключення",
+              "unknown": "Невідомо"
+            }
+          },
+          "current_interval": {
+            "name": "Поточний інтервал"
+          },
+          "next_change": {
+            "name": "Наступна зміна"
+          },
+          "queue": {
+            "name": "Черга"
+          }
+        }
+      },
+      "tomorrow_published": {
+        "name": "Графік на завтра опубліковано"
+      }
+    },
+    "sensor": {
+      "schedule": {
+        "name": "Графік",
+        "state": {
+          "available": "Світло є",
+          "outage": "Відключення",
+          "probable": "Можливе відключення",
+          "unknown": "Невідомо"
+        },
+        "state_attributes": {
+          "queue": {
+            "name": "Черга"
+          },
+          "current": {
+            "name": "Поточний інтервал"
+          },
+          "today": {
+            "name": "Сьогодні"
+          },
+          "tomorrow": {
+            "name": "Завтра"
+          },
+          "messages": {
+            "name": "Повідомлення"
+          }
+        }
+      },
+      "next_change": {
+        "name": "Наступна зміна стану",
+        "state_attributes": {
+          "next_power_state": {
+            "name": "Наступний стан",
+            "state": {
+              "on": "Світло є",
+              "off": "Світла немає"
+            }
+          }
+        }
+      },
+      "time_to_change": {
+        "name": "До відключення / увімкнення",
+        "state_attributes": {
+          "next_power_state": {
+            "name": "Наступний стан",
+            "state": {
+              "on": "Світло є",
+              "off": "Світла немає"
+            }
+          }
+        }
+      },
+      "queue": {
+        "name": "Черга"
+      },
+      "outage_today": {
+        "name": "Відключень сьогодні"
+      },
+      "outage_tomorrow": {
+        "name": "Відключень завтра"
+      },
+      "last_update": {
+        "name": "Останнє оновлення даних"
+      },
+      "next_power_off": {
+        "name": "Наступне відключення"
+      },
+      "next_power_on": {
+        "name": "Наступне вмикання"
+      }
+    },
+    "calendar": {
+      "outages": {
+        "name": "Відключення"
+      }
+    },
+    "button": {
+      "refresh": {
+        "name": "Оновити графік"
+      }
+    },
+    "event": {
+      "schedule_event": {
+        "name": "Події графіка",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "power_off": "Світло зникло",
+              "power_on": "Світло з'явилося",
+              "schedule_changed": "Графік змінено",
+              "tomorrow_published": "Графік на завтра опубліковано"
+            }
+          }
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "cannot_connect": {
+      "message": "Не вдалося отримати графік: {error}"
+    },
+    "invalid_response": {
+      "message": "Сервер повернув некоректні дані: {error}"
+    }
+  },
+  "services": {
+    "get_schedule": {
+      "name": "Отримати графік",
+      "description": "Повертає графік відключень на наступні дні.",
+      "fields": {
+        "days": {
+          "name": "Днів",
+          "description": "Скільки днів повернути, починаючи з сьогодні."
+        }
+      }
+    }
+  },
+  "issues": {
+    "api_unavailable": {
+      "title": "Сервер відключень недоступний",
+      "description": "Сервер графіків Житомиробленерго не відповідає кілька годин (адреса: {title}). Використовується останній відомий графік. Перевірте з'єднання з інтернетом або стан https://www.ztoe.com.ua/."
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Сервер доступний",
+      "configured_addresses": "Налаштованих адрес"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "domain": "svitlo_ye",
+  "name": "СвітлоЄ? (Житомиробленерго)",
+  "codeowners": [
+    "@dmitthedazed"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/dmitthedazed/svitlo-ye-ha",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/dmitthedazed/svitlo-ye-ha/issues",
+  "requirements": [],
+  "version": "1.0.0",
+  "after_dependencies": [
+    "http",
+    "frontend"
+  ]
+}

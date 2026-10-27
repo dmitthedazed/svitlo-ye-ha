@@ -1,0 +1,73 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "power": {
+        "default": "mdi:lightbulb-on",
+        "state": {
+          "off": "mdi:lightbulb-off-outline"
+        }
+      },
+      "tomorrow_published": {
+        "default": "mdi:calendar-check",
+        "state": {
+          "off": "mdi:calendar-clock"
+        }
+      }
+    },
+    "sensor": {
+      "schedule": {
+        "default": "mdi:calendar-clock",
+        "state": {
+          "available": "mdi:lightbulb-on",
+          "outage": "mdi:lightbulb-off-outline",
+          "probable": "mdi:lightbulb-question-outline",
+          "unknown": "mdi:help-circle-outline"
+        }
+      },
+      "next_change": {
+        "default": "mdi:clock-start"
+      },
+      "time_to_change": {
+        "default": "mdi:timer-sand"
+      },
+      "queue": {
+        "default": "mdi:format-list-numbered"
+      },
+      "outage_today": {
+        "default": "mdi:transmission-tower-off"
+      },
+      "outage_tomorrow": {
+        "default": "mdi:transmission-tower-off"
+      },
+      "last_update": {
+        "default": "mdi:update"
+      },
+      "next_power_off": {
+        "default": "mdi:flash-off-outline"
+      },
+      "next_power_on": {
+        "default": "mdi:flash-outline"
+      }
+    },
+    "calendar": {
+      "outages": {
+        "default": "mdi:calendar-alert"
+      }
+    },
+    "button": {
+      "refresh": {
+        "default": "mdi:cloud-refresh"
+      }
+    },
+    "event": {
+      "schedule_event": {
+        "default": "mdi:calendar-sync"
+      }
+    }
+  },
+  "services": {
+    "get_schedule": {
+      "service": "mdi:calendar-search"
+    }
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Grid district (REM)",
+        "description": "Choose the Zhytomyroblenergo district (REM) of your address.",
+        "data": {
+          "rem_id": "REM"
+        },
+        "data_description": {
+          "rem_id": "Regional grid unit."
+        }
+      },
+      "city": {
+        "title": "Settlement",
+        "description": "REM: {rem}",
+        "data": {
+          "city_id": "Settlement"
+        },
+        "data_description": {
+          "city_id": "City, town or village."
+        }
+      },
+      "street_search": {
+        "title": "Find the street",
+        "description": "{city} has {count} streets. Enter a part of the name (e.g. \"Київська\") to narrow the list, or leave empty to show all.",
+        "data": {
+          "street_search": "Part of the street name"
+        },
+        "data_description": {
+          "street_search": "Case-insensitive search."
+        }
+      },
+      "street": {
+        "title": "Street",
+        "description": "Settlement: {city}",
+        "data": {
+          "street_id": "Street"
+        },
+        "data_description": {
+          "street_id": "Street, lane, square, etc."
+        }
+      },
+      "house": {
+        "title": "House",
+        "description": "Street: {street}. Each house shows its queue.",
+        "data": {
+          "house": "House",
+          "name": "Name (optional)"
+        },
+        "data_description": {
+          "house": "House number and outage queue/sub-queue.",
+          "name": "For example \"Home\" or \"Work\". Defaults to street and house."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the Zhytomyroblenergo server. Try again.",
+      "no_cities": "No settlements found for this REM.",
+      "no_streets": "No streets found for this settlement.",
+      "no_street_match": "No street matches this name.",
+      "no_houses": "No houses found for this street."
+    },
+    "abort": {
+      "already_configured": "This address is already configured.",
+      "cannot_connect": "Failed to connect to the Zhytomyroblenergo server.",
+      "reconfigure_successful": "Address updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "data": {
+          "scan_interval": "Update interval (minutes)"
+        },
+        "data_description": {
+          "scan_interval": "How often the schedule is downloaded. Entity states are re-evaluated every minute regardless."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "power": {
+        "name": "Power",
+        "state_attributes": {
+          "status": {
+            "name": "Status",
+            "state": {
+              "available": "Power on",
+              "outage": "Outage",
+              "probable": "Possible outage",
+              "unknown": "Unknown"
+            }
+          },
+          "current_interval": {
+            "name": "Current interval"
+          },
+          "next_change": {
+            "name": "Next change"
+          },
+          "queue": {
+            "name": "Queue"
+          }
+        }
+      },
+      "tomorrow_published": {
+        "name": "Tomorrow's schedule published"
+      }
+    },
+    "sensor": {
+      "schedule": {
+        "name": "Schedule",
+        "state": {
+          "available": "Power on",
+          "outage": "Outage",
+          "probable": "Possible outage",
+          "unknown": "Unknown"
+        },
+        "state_attributes": {
+          "queue": {
+            "name": "Queue"
+          },
+          "current": {
+            "name": "Current interval"
+          },
+          "today": {
+            "name": "Today"
+          },
+          "tomorrow": {
+            "name": "Tomorrow"
+          },
+          "messages": {
+            "name": "Messages"
+          }
+        }
+      },
+      "next_change": {
+        "name": "Next power change",
+        "state_attributes": {
+          "next_power_state": {
+            "name": "Next state",
+            "state": {
+              "on": "Power on",
+              "off": "Power off"
+            }
+          }
+        }
+      },
+      "time_to_change": {
+        "name": "Time to power change",
+        "state_attributes": {
+          "next_power_state": {
+            "name": "Next state",
+            "state": {
+              "on": "Power on",
+              "off": "Power off"
+            }
+          }
+        }
+      },
+      "queue": {
+        "name": "Queue"
+      },
+      "outage_today": {
+        "name": "Outages today"
+      },
+      "outage_tomorrow": {
+        "name": "Outages tomorrow"
+      },
+      "last_update": {
+        "name": "Last data update"
+      },
+      "next_power_off": {
+        "name": "Next power off"
+      },
+      "next_power_on": {
+        "name": "Next power on"
+      }
+    },
+    "calendar": {
+      "outages": {
+        "name": "Outages"
+      }
+    },
+    "button": {
+      "refresh": {
+        "name": "Refresh schedule"
+      }
+    },
+    "event": {
+      "schedule_event": {
+        "name": "Schedule events",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "power_off": "Power off",
+              "power_on": "Power on",
+              "schedule_changed": "Schedule changed",
+              "tomorrow_published": "Tomorrow published"
+            }
+          }
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "cannot_connect": {
+      "message": "Failed to fetch the schedule: {error}"
+    },
+    "invalid_response": {
+      "message": "The server returned invalid data: {error}"
+    }
+  },
+  "services": {
+    "get_schedule": {
+      "name": "Get schedule",
+      "description": "Returns the outage schedule for the next days.",
+      "fields": {
+        "days": {
+          "name": "Days",
+          "description": "How many days to return, starting today."
+        }
+      }
+    }
+  },
+  "issues": {
+    "api_unavailable": {
+      "title": "Outage server is unavailable",
+      "description": "The Zhytomyroblenergo schedule server has not answered for several hours (address: {title}). The last known schedule is still used. Check your internet connection or the status of https://www.ztoe.com.ua/."
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Can reach the server",
+      "configured_addresses": "Configured addresses"
+    }
+  }
+}

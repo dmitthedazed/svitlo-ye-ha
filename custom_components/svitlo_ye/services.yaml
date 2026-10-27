@@ -1,0 +1,14 @@
+get_schedule:
+  target:
+    entity:
+      integration: svitlo_ye
+      domain: sensor
+  fields:
+    days:
+      required: false
+      default: 2
+      selector:
+        number:
+          min: 1
+          max: 7
+          mode: box
