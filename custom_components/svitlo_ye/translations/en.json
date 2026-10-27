@@ -228,7 +228,7 @@
   "issues": {
     "api_unavailable": {
       "title": "Outage server is unavailable",
-      "description": "The Zhytomyroblenergo schedule server has not answered for several hours (address: {title}). The last known schedule is still used. Check your internet connection or the status of https://www.ztoe.com.ua/."
+      "description": "The Zhytomyroblenergo schedule server has not answered for several hours (address: {title}). The last known schedule is still used. Check your internet connection or the status of {url}."
     }
   },
   "system_health": {

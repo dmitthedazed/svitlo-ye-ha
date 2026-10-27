@@ -17,6 +17,7 @@ from .const import (
     CONF_CHERGA,
     CONF_PIDCHERGA,
     CONF_SCAN_INTERVAL,
+    CONFIGURATION_URL,
     DEFAULT_SCAN_INTERVAL_MIN,
     DOMAIN,
     FAILURES_BEFORE_ISSUE,
@@ -78,7 +79,10 @@ class SvitloYeCoordinator(DataUpdateCoordinator[ScheduleData]):
                 is_fixable=False,
                 severity=ir.IssueSeverity.WARNING,
                 translation_key=ISSUE_API_UNAVAILABLE,
-                translation_placeholders={"title": self.config_entry.title},
+                translation_placeholders={
+                    "title": self.config_entry.title,
+                    "url": CONFIGURATION_URL,
+                },
             )
 
     @callback

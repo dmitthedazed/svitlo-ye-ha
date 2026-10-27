@@ -18,6 +18,7 @@ const LABELS = {
     none: "Schedule not published", next: "Next", msg: "Messages",
   },
 };
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const toMin = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
 
 class SvitloYeCard extends HTMLElement {
@@ -47,7 +48,7 @@ class SvitloYeCard extends HTMLElement {
     const segs = intervals.map((i) => {
       const s = toMin(i.start_time), e = toMin(i.end_time === "24:00" ? "24:00" : i.end_time) || 1440;
       const end = i.end_time.startsWith("00:00") ? 1440 : e;
-      return `<div class="seg" style="left:${(s / 1440) * 100}%;width:${((end - s) / 1440) * 100}%;background:${COLORS[i.status] || COLORS.unknown}" title="${i.start_time}–${i.end_time}"></div>`;
+      return `<div class="seg" style="left:${(s / 1440) * 100}%;width:${((end - s) / 1440) * 100}%;background:${COLORS[i.status] || COLORS.unknown}" title="${esc(i.start_time)}–${esc(i.end_time)}"></div>`;
     }).join("");
     const marker = isToday ? `<div class="now"></div>` : "";
     const ticks = [0, 6, 12, 18, 24].map((h) => `<span style="left:${(h / 24) * 100}%">${h}</span>`).join("");
@@ -56,18 +57,18 @@ class SvitloYeCard extends HTMLElement {
 
   _list(intervals) {
     return intervals.filter((i) => i.status === "outage" || i.status === "probable")
-      .map((i) => `<span class="chip" style="border-color:${COLORS[i.status]}">${i.start_time}–${i.end_time}</span>`).join("") || "";
+      .map((i) => `<span class="chip" style="border-color:${COLORS[i.status]}">${esc(i.start_time)}–${esc(i.end_time)}</span>`).join("") || "";
   }
 
   _render() {
     const st = this._hass.states[this._config.entity];
-    if (!st) { this.innerHTML = `<ha-card><div class="pad">Entity not found: ${this._config.entity}</div></ha-card>`; return; }
+    if (!st) { this.innerHTML = `<ha-card><div class="pad">Entity not found: ${esc(this._config.entity)}</div></ha-card>`; return; }
     const t = this._t(), a = st.attributes;
     const section = (title, items, isToday) => `
       <div class="day"><div class="title">${title}</div>
       ${items.length ? this._bar(items, isToday) + `<div class="chips">${this._list(items)}</div>` : `<div class="muted">${t.none}</div>`}</div>`;
     const msgs = this._config.show_messages && a.messages?.length
-      ? `<div class="msgs">${a.messages.map((m) => `<div>⚠ ${m}</div>`).join("")}</div>` : "";
+      ? `<div class="msgs">${a.messages.map((m) => `<div>⚠ ${esc(m)}</div>`).join("")}</div>` : "";
     this.innerHTML = `
       <style>
         .pad{padding:16px} .head{display:flex;align-items:center;gap:12px;padding:16px 16px 4px}
